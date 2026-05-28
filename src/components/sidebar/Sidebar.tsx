@@ -50,7 +50,7 @@ export default function Sidebar() {
   });
 
   const handleGeocode = async () => {
-    if (!csvData.length || !selectedAddressCol || !selectedWeightCol) return;
+    if (!csvData.length || !columns.includes(selectedAddressCol) || !columns.includes(selectedWeightCol)) return;
     
     setIsGeocoding(true);
     try {
@@ -122,7 +122,7 @@ export default function Sidebar() {
                 value={selectedAddressCol} 
                 onChange={(e) => setSelectedAddressCol(e.target.value)}
               >
-                {columns.map(col => <option key={col} value={col}>{col}</option>)}
+                {columns.map((col, index) => <option key={index} value={col}>{col || `(빈 컬럼명 ${index + 1})`}</option>)}
               </select>
             </div>
             <div className="space-y-2">
@@ -132,7 +132,7 @@ export default function Sidebar() {
                 value={selectedWeightCol} 
                 onChange={(e) => setSelectedWeightCol(e.target.value)}
               >
-                {columns.map(col => <option key={col} value={col}>{col}</option>)}
+                {columns.map((col, index) => <option key={index} value={col}>{col || `(빈 컬럼명 ${index + 1})`}</option>)}
               </select>
             </div>
 
