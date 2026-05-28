@@ -10,6 +10,7 @@ export default function Sidebar() {
     csvData,
     setCsvData,
     setGeocodedData,
+    humanMarker,
   } = useMapStore();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -71,6 +72,23 @@ export default function Sidebar() {
               ✓ {csvData.length}개의 데이터가 로드되어 히트맵에 반영되었습니다.
             </p>
           )}
+        </div>
+
+        {/* Human Marker Panel */}
+        <div className="space-y-2 pt-6 border-t border-slate-200">
+          <Label className="text-sm font-semibold text-slate-700">최종 선정 입지 (Human Marker)</Label>
+          <div className="bg-slate-100 p-4 rounded-lg text-sm border border-slate-200 shadow-inner">
+            {humanMarker ? (
+              <div className="space-y-1">
+                <p><span className="font-medium">위도:</span> {humanMarker.lat.toFixed(5)}</p>
+                <p><span className="font-medium">경도:</span> {humanMarker.lng.toFixed(5)}</p>
+              </div>
+            ) : (
+              <p className="text-slate-500 text-center italic">
+                지도에서 최적의 위치를<br/>클릭하여 선정하세요.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>
